@@ -22,7 +22,7 @@ jobs:
       - name: Get tag 
         id: get_tag
         run: |
-          echo ::set-output name=VTAG::$( echo GITHUB_REF | cut -d / -f 3 )
+          echo ::set-output name=VTAG::$( echo $GITHUB_REF | cut -d / -f 3 )
 
       - name: Upload lambda to assets
         id: upload-lambda-asset
