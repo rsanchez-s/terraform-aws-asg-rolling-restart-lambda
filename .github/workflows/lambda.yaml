@@ -28,6 +28,9 @@ jobs:
         id: upload-lambda-asset
         uses: actions/upload-artifact@v2
         with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          files: ./lambda.zip
+          name: lambda.zip
+          path: ./lambda.zip
+          if-no-file-found: error 
+#          repo-token: ${{ secrets.GITHUB_TOKEN }}
+#          files: ./lambda.zip
 #         release-tag: ${{ steps.get_tag.outputs.VTAG }}
