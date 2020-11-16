@@ -15,7 +15,7 @@ jobs:
         uses: actions/checkout@v2
       - name: Build Lambda Function
         run: |
-          zip -9yr  lambda.zip rolling-start.py
+          zip lambda.zip -i ./rolling-start.py
       - name: Create release
         id: create_release
         uses: actions/create-release@v1
