@@ -21,7 +21,9 @@ jobs:
       - name: Upload lambda to assets
         id: upload-lambda-asset
         uses: AButler/upload-release-assets@v2.0
+        run: |
+          ls
         with:
           repo-token: ${{ secrets.LAMBDA_ZIP_TOKEN }}
-          files: ./lambda.zip
+          files: lambda.zip
           release-tag: ${{ github.ref }}
