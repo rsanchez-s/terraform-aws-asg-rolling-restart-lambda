@@ -25,3 +25,4 @@ jobs:
         with:
           repo-token: ${{ secrets.LAMBDA_ZIP_TOKEN }}
           files: '*.zip'
+          release-tag: ${{ github.ref }}
