@@ -19,10 +19,15 @@ jobs:
           zip lambda.zip rolling-restart.py
           ls
 
+      - name: Get tag 
+        id: get_tag
+        run: |
+          echo ::set-output name=VTAG::$( echo GITHUB_REF | cut -d / -f 3 )
+
       - name: Upload lambda to assets
         id: upload-lambda-asset
         uses: AButler/upload-release-assets@v2.0
         with:
-          repo-token: ${{ secrets.LAMBDA_ZIP_TOKEN }}
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
           files: '*.zip'
-          release-tag: 'v1.0.1-rc22'
+          release-tag: ${{ steps.get_tag.outputs.VTAG }}
