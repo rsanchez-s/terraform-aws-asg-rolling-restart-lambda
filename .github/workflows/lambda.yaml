@@ -2,6 +2,12 @@ name: Create a zipped lambda func for deployment
 
 on:
   release:
+    types:
+      - published
+      - created
+      - edited
+      - prereleased
+      - released
 
 jobs:
   build:
