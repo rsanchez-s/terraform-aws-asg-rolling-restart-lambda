@@ -25,9 +25,11 @@ jobs:
           echo ::set-output name=VTAG::$( echo $GITHUB_REF | cut -d / -f 3 )
 
       - name: Upload lambda to assets
-        id: upload-lambda-asset
-        uses: AButler/upload-release-assets@v2.0
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          files: '*.zip'
-          release-tag: ${{ steps.get_tag.outputs.VTAG }}
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: ./lambda.zip
+          asset_name: lambda.zip
+          asset_content_type: application/zip
