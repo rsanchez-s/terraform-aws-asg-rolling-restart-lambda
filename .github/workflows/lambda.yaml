@@ -19,10 +19,16 @@ jobs:
           zip lambda.zip rolling-restart.py
           ls
 
+      - name: Get release
+        id: get_release
+        uses: bruceadams/get-release@v1.2.2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Get tag 
         id: get_tag
         run: |
-          printenv
+          echo ${{ steps.get_release.outputs.upload_url }}
           echo ::set-output name=VTAG::$( echo $GITHUB_REF | cut -d / -f 3 )
 
       - name: Upload lambda to assets
@@ -30,7 +36,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ github.event.release.upload_url }}
+          upload_url: ${{ steps.get_release.outputs.upload_url }}
           asset_path: ./lambda.zip
           asset_name: lambda.zip
           asset_content_type: application/zip
