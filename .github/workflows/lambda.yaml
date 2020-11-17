@@ -22,6 +22,7 @@ jobs:
       - name: Get tag 
         id: get_tag
         run: |
+          printenv
           echo ::set-output name=VTAG::$( echo $GITHUB_REF | cut -d / -f 3 )
 
       - name: Upload lambda to assets
